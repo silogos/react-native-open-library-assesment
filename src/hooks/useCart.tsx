@@ -24,6 +24,7 @@ function useCart() {
     navigation.setOptions({
       headerRight: () => (
         <Button
+          color={'#F31559'}
           onPress={() => setShowModalCart(true)}
           title={cart.length >= 1 ? `Cart(${cart.length})` : 'Cart'}
         />

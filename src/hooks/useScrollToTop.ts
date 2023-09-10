@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { FlatList } from 'react-native';
 
 function useScrollToTop(selected: string) {
   const flatListRef = useRef<FlatList>(null);

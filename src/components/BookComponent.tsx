@@ -25,12 +25,11 @@ function BookComponent({
   const coverBook = getCoverBook(work, 'M');
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.shadowContainer]}>
       <Image
         source={{ uri: coverBook }}
-        width={120}
-        height={150}
         resizeMode="cover"
+        style={styles.image}
       />
       <View style={styles.content}>
         <Text style={styles.title} lineBreakMode="tail" numberOfLines={1}>
@@ -60,11 +59,28 @@ function BookComponent({
 
 const styles = StyleSheet.create({
   container: {
+    marginVertical: 5,
+    marginHorizontal: 15,
     flexDirection: 'row',
-    marginBottom: 10,
-    elevation: 1,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#CCC',
+    alignItems: 'stretch',
+    backgroundColor: '#FFF',
+  },
+  shadowContainer: {
+    elevation: 3,
+    shadowColor: '#171717',
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  image: {
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    overflow: 'hidden',
+    width: 120,
+    height: '100%',
   },
   content: {
     flex: 1,
@@ -72,9 +88,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
-  title: { fontSize: 18, fontWeight: 'bold', marginBottom: 5 },
+  title: { fontSize: 15, fontWeight: 'bold', marginBottom: 5 },
   desc: {
-    fontSize: 15,
+    fontSize: 12,
     marginBottom: 3,
   },
   button: {
@@ -82,17 +98,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 5,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: 'blue',
+    borderColor: '#F31559',
   },
   text: {
-    fontSize: 14,
-    lineHeight: 21,
+    fontSize: 12,
+    lineHeight: 12,
     fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: 'blue',
+    color: '#F31559',
   },
 });
 

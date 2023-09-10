@@ -13,6 +13,7 @@ import {
 import { Work } from '../interfaces/OpenLibraryInterface';
 import CartItemComponent from './CartItemComponent';
 import DatePicker from 'react-native-date-picker';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 interface IModalCartComponent {
   visible: boolean;
@@ -60,7 +61,9 @@ function ModalCartComponent({
       <SafeAreaView style={styles.list}>
         <View style={styles.header}>
           <Text style={styles.title}>Cart</Text>
-          <Button title={'X'} onPress={onRequestClose} />
+          <TouchableOpacity onPress={onRequestClose} testID="close">
+            <Icon name="close" size={20} color={'#F31559'} />
+          </TouchableOpacity>
         </View>
         {cart.length >= 1 ? (
           <>
@@ -77,11 +80,16 @@ function ModalCartComponent({
                 <Button
                   title={date ? date.toLocaleString() : 'Select date >'}
                   onPress={() => setOpen(true)}
+                  color={'#F31559'}
                 />
               </View>
-              <TouchableOpacity style={styles.checkout} onPress={onCheckout}>
-                <Text>Check out</Text>
-              </TouchableOpacity>
+              <View style={styles.checkout}>
+                <Button
+                  title="Check out"
+                  color={'#F31559'}
+                  onPress={onCheckout}
+                />
+              </View>
             </View>
           </>
         ) : (
@@ -89,6 +97,7 @@ function ModalCartComponent({
         )}
       </SafeAreaView>
       <DatePicker
+        testID="Date Picker"
         modal
         open={open}
         date={date || new Date()}
@@ -109,16 +118,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
+    borderBottomColor: '#FF52A2',
     paddingHorizontal: 15,
     paddingVertical: 5,
   },
   title: {
     flex: 1,
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '600',
   },
   list: {
     flex: 1,
+    paddingTop: 10,
   },
   footer: {
     borderTopWidth: 1,

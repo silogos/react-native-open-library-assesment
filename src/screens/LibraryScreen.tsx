@@ -3,8 +3,6 @@ import {
   ActivityIndicator,
   FlatList,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -60,30 +58,34 @@ function LibraryScreen({}): JSX.Element {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={'dark-content'} />
       <View style={styles.subject}>
-        <Text style={[styles.subjectItemTitle]}>Genre:</Text>
-        <ScrollView horizontal={true}>
-          {subjects.map(subject => (
+        {/* <Text style={[styles.subjectItemTitle]}>Genre:</Text> */}
+        <FlatList
+          horizontal
+          data={subjects}
+          keyExtractor={item => item.key}
+          renderItem={({ item }) => (
             <TouchableOpacity
-              key={subject.key}
               style={styles.subjectItem}
-              onPress={() => setSelected(subject.key)}>
+              onPress={() => setSelected(item.key)}>
               <Text
                 style={[
                   styles.subjectItemTitle,
-                  subject.key === selected ? styles.subjectItemActive : null,
+                  item.key === selected && styles.subjectItemActive,
                 ]}>
-                #{subject.title}
+                {item.title}
               </Text>
+              {item.key === selected ? <View style={styles.underline} /> : null}
             </TouchableOpacity>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
       {error ? <Text style={styles.error}>Error fetching data</Text> : null}
       {data ? (
         <FlatList
           ref={flatListRef}
+          style={styles.list}
+          keyExtractor={item => item.key}
           data={mergeBookList(data)}
           renderItem={({ item }) => (
             <BookComponent
@@ -120,23 +122,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   subject: {
-    flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
     gap: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#000',
+    borderBottomColor: '#FF52A2',
   },
   subjectItem: {
     marginRight: 10,
   },
   subjectItemTitle: {
-    color: 'blue',
+    color: '#FF52A2',
   },
   subjectItemActive: {
     fontWeight: 'bold',
-    textDecorationLine: 'underline',
+    color: '#F31559',
+  },
+  underline: {
+    backgroundColor: '#F31559',
+    height: 3,
+    width: 20,
+    borderRadius: 3,
+    alignSelf: 'center',
+    marginTop: 2,
+  },
+  list: {
+    paddingTop: 10,
   },
   loading: {
     padding: 15,

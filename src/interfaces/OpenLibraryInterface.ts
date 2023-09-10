@@ -31,7 +31,7 @@ export interface Work {
   key: string;
   title: string;
   edition_count: number;
-  cover_id: number;
+  cover_id?: number;
   cover_edition_key: string;
   subject: any[];
   ia_collection: any[];
